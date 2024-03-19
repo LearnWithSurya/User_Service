@@ -22,10 +22,5 @@ COPY --from=build /app/target/*.jar app.jar
 # Expose the server port
 EXPOSE 9090
 
-# Set environment variables for MySQL
-ENV SPRING_DATASOURCE_URL=jdbc:mysql://mysql-container:3306/durgesh_microservice
-ENV SPRING_DATASOURCE_USERNAME=root
-ENV SPRING_DATASOURCE_PASSWORD=root
-
 # Run the Spring Boot application when the container starts
 ENTRYPOINT ["java", "-jar", "app.jar"]
