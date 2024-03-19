@@ -1,0 +1,29 @@
+version: "3"
+services:
+  application:
+    build: .
+    ports:
+      - "9090:9090"
+    networks:
+      - springboot-db-net
+    depends_on:
+      - mysqldb
+    volumes:
+      - /data/springboot-app:/app
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysqldb:3306/durgesh_microservice
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+
+  mysqldb:
+    image: mysql:5.7
+    networks:
+      - springboot-db-net
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: durgesh_microservice
+    volumes:
+      - /data/mysql:/var/lib/mysql
+
+networks:
+  springboot-db-net:
